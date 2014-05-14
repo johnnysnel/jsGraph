@@ -6,7 +6,7 @@ An implementation of a graph ADT written in javascript.
 This is a set of libraries I wrote to practice for my Algorithms & Data Structures final. I wanted to practice the material, while improving my knowledge of javascript.
 
 <h3>The repo includes:</h3>
-======
+
 <ul>
 <li>A traversals library, which implements a number of common algorithms, such as Dijkstra's and Topological Sort.</li>
 
