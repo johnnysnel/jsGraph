@@ -67,8 +67,8 @@ var GraphPkg = {};
 
 	GraphPkg.jsVertex = function(vertKey, vertData) {
 
-		this.myVertKey = vertKey;
-		this.myVertData = vertData;
+		this.vertKey = vertKey;
+		this.vertData = vertData;
 		this.incidentEdges = {};
 		this.outgoingEdges = {};
 		this.incidentEdgeCounter = 0;
@@ -77,15 +77,15 @@ var GraphPkg = {};
 	};
 
 	GraphPkg.jsVertex.prototype.getKey = function() {
-		return this.myVertKey;
+		return this.vertKey;
 	}
 
 	GraphPkg.jsVertex.prototype.getData = function() {
-		return this.myVertData;
+		return this.vertData;
 	}
 
 	GraphPkg.jsVertex.prototype.setData = function(newData) {
-		this.myVertKey = newData;
+		this.vertKey = newData;
 	}
 
 	GraphPkg.jsVertex.prototype.getIncidentEdges = function() {
