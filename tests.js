@@ -1,6 +1,6 @@
 /* global GraphPkg, Traversal, Mustache, $, Visualizer */
 
-var li_template = '<li class="list-group-item">{{myVertKey}}</li>';
+var li_template = '<li class="list-group-item">{{vertKey}}</li>';
 
 $(document).ready(function() {
 
