@@ -10,3 +10,6 @@ The repo includes:
 -A graph library, which houses contructors for vertices, edges, and a graph object.
 -a visualizer using the paper.js framework.
 
+See the demo here:
+http://johnnysnel.github.io/jsGraph/
+
