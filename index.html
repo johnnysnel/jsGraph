@@ -1,0 +1,74 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			.list-group {
+				/*width: 25%;*/
+			}
+
+			#di-input {
+				/*width: 10%;*/
+			}
+
+			#graph-canvas {
+				border: 2px solid black;
+				margin-right:5px;
+				margin-bottom: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="paper-full.min.js"></script>
+		<script type="text/paperscript" src="GraphVisualizer.js" canvas="graph-canvas"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<h1>Graph and Traversal Tests</h1>
+			<p class="lead">Draw a graph with the visualizer, then click the algorithm you'd like to perform on it.</p>
+			<p> For more options, you can also define your graph in test.js</p>
+			<div>
+				<canvas id="graph-canvas" height="400" width="800"></canvas>
+				<button class="btn btn-default" id="init-graph">Initialize Graph</button>
+				<p>Hold shift then mouse over two vertices to connect them with an edge.</p>
+				<p>Note: for the time being, the visualizer only builds undirected graphs with random weights</p>
+			</div>
+			<div class="row">
+				<button class="btn btn-default col-md-6" id="topsort-go">topsort</button>
+				<ul class="list-group col-md-6" id="topsort-results">
+				</ul>
+			</div>
+			<div class="row">
+				<button class="btn btn-default col-md-6" id="g-bfs-go">graph BFS</button>
+				<ul class="list-group col-md-6" id="g-bfs-results">
+				</ul>
+			</div>
+			<div class="row">
+			<button class="btn btn-default col-md-6" id="g-dfs-go">graph recursive DFS</button>
+			<ul class="list-group col-md-6" id="g-dfs-results">
+			</ul>
+			</div>
+			<div class="row">
+				<div class="input-group col-md-6">
+					<div class="input-group-btn">
+						<button class="btn btn-default" id="dijkstra-go">dijkstra</button>
+					</div>
+					<input type="text" id="di-input" class="form-control" value="vert0">
+				</div>
+				<ul class="list-group col-md-6" id="dijkstra-results">
+				</ul>
+			</div>
+
+			<div class="row">
+			<button class="btn btn-default col-md-6" id="bell-ford-go">Bellman-Ford</button>
+			<ul class="list-group col-md-6" id="bell-ford-results">
+			</ul>
+			</div>
+
+			<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+			<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+			<script type="text/javascript" src="Heap.js"></script>
+			<script type="text/javascript" src="jsGraph.js"></script>
+			<script type="text/javascript" src="Traversals.js"></script>
+			<script type="text/javascript" src="tests.js"></script>
+		</div>
+	</body>
+</html>
