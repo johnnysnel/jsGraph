@@ -5,59 +5,59 @@ var GraphPkg = {};
 	////////////////////
 
 	GraphPkg.jsEdge = function(edgeKey, edgeWeight) {
-		this.e_origin = null;
-		this.e_destination = null;
-		this.e_edgeKey = edgeKey;
-		this.e_edgeWeight = edgeWeight;
-		this.e_visited = false;
+		this.origin = null;
+		this.destination = null;
+		this.edgeKey = edgeKey;
+		this.edgeWeight = edgeWeight;
+		this.visited = false;
 	};
 
 	GraphPkg.jsEdge.prototype.getOpposite = function(vert) {
-		if (vert === this.e_destination) {
-			return this.e_origin;
+		if (vert === this.destination) {
+			return this.origin;
 		} else {
-			return this.e_destination;
+			return this.destination;
 		}
 	}
 
 	GraphPkg.jsEdge.prototype.getOrigin = function() {
-		return this.e_origin;
+		return this.origin;
 	}
 
 	GraphPkg.jsEdge.prototype.setOrigin = function(origin) {
-		this.e_origin = origin;
+		this.origin = origin;
 	}
 
 	GraphPkg.jsEdge.prototype.getDestination = function() {
-		return this.e_destination;
+		return this.destination;
 	}
 
 	GraphPkg.jsEdge.prototype.setDestination = function(destination) {
-		this.e_destination = destination;
+		this.destination = destination;
 	}
 
 	GraphPkg.jsEdge.prototype.getKey = function() {
-		return this.e_edgeKey;
+		return this.edgeKey;
 	}
 
 	GraphPkg.jsEdge.prototype.setKey = function(data) {
-		this.e_edgeKey = data;
+		this.edgeKey = data;
 	}
 
 	GraphPkg.jsEdge.prototype.getWeight = function() {
-		return this.e_edgeWeight;
+		return this.edgeWeight;
 	}
 
 	GraphPkg.jsEdge.prototype.setWeight = function(data) {
-		this.e_edgeWeight = data;
+		this.edgeWeight = data;
 	}
 
 	GraphPkg.jsEdge.prototype.visited = function() {
-		return this.e_visited;
+		return this.visited;
 	}
 
 	GraphPkg.jsEdge.prototype.setVisited = function(bool) {
-		this.e_visited = bool;
+		this.visited = bool;
 	}
 
 
