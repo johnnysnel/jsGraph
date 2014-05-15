@@ -5,6 +5,7 @@ var GraphPkg = {};
 	////////////////////
 
 	GraphPkg.jsEdge = function(edgeKey, edgeWeight) {
+		this.edgeType = 'undirected',
 		this.origin = null;
 		this.destination = null;
 		this.edgeKey = edgeKey;
@@ -103,8 +104,10 @@ var GraphPkg = {};
 	}
 
 	GraphPkg.jsVertex.prototype.clearIncidentEdges = function() {
+		var tempEdges = this.incidentEdges;
 		this.incidentEdges = {};
 		this.incidentEdgeCounter = 0;
+		return tempEdges;
 	}
 
 	GraphPkg.jsVertex.prototype.getNumberOfIncidentEdges = function() {
@@ -126,8 +129,10 @@ var GraphPkg = {};
 	}
 
 	GraphPkg.jsVertex.prototype.clearOutgoingEdges = function() {
+		var tempEdges = this.outgoingEdges;
 		this.outgoingEdges = {};
 		this.outgoingEdgeCounter = 0;
+		return tempEdges;
 	}
 
 	GraphPkg.jsVertex.prototype.getNumberOfOutgoingEdges = function() {
@@ -200,6 +205,7 @@ var GraphPkg = {};
 	};
 
 	GraphPkg.jsGraph.prototype.insertEdge = function(v1, v2, edge) {
+		edge.edgeType = 'directed';
 		edge.setOrigin(v1);
 		edge.setDestination(v2);
 		v1.insertOutgoingEdge(edge);
@@ -208,6 +214,7 @@ var GraphPkg = {};
 	};
 
 	GraphPkg.jsGraph.prototype.insertUndirectedEdge = function(v1, v2, edge) {
+		edge.edgeType = 'undirected';
 		edge.setOrigin(v1);
 		edge.setDestination(v2);
 		v1.insertOutgoingEdge(edge);
@@ -218,10 +225,27 @@ var GraphPkg = {};
 		this.graphEdges[edge.getKey().toString()] = edge;
 	};
 
-	//todo need to update jsGraph's edges table
 	GraphPkg.jsGraph.prototype.removeVertex = function(vertex) {
-		vertex.clearIncidentEdges();
-		vertex.clearOutgoingEdges();
+		var inEdges = vertex.clearIncidentEdges();
+		for (var edge in inEdges) {
+			if (inEdges.hasOwnProperty(edge)) {
+				if (inEdges[edge].edgeType === 'directed') {
+					this.removeEdge(inEdges[edge]);
+				} else {
+					this.removeUndirectedEdge(inEdges[edge]);
+				}
+			}
+		}
+		var outEdges = vertex.clearOutgoingEdges();
+		for (var edge in outEdges) {
+			if (outEdges.hasOwnProperty(edge)) {
+				if (outEdges[edge].edgeType === 'directed') {
+					this.removeEdge(outEdges[edge]);
+				} else {
+					this.removeUndirectedEdge(outEdges[edge]);
+				}
+			}
+		}
 		delete this.graphVerts[vertex.getKey().toString()];
 	};
 
