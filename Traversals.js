@@ -84,7 +84,7 @@ var Traversal = {};
 	};
 
 	//doesn't work quite right. Or maybe just isn't sending the right info? Or maybe the heap is a max heap, not a min heap?
-	Traversal.dijkstra = function(start, graph, behavior, callback) {
+	Traversal.dijkstra = function(start, end, graph, callback) {
 		//comparator... because of how heap was implemented
 		var identity = function(vert) {
 			return vert.dist;
@@ -111,23 +111,31 @@ var Traversal = {};
 
 		while (heap.size() > 0) {
 			var curr_vert = heap.pop();
-			behavior(curr_vert);
 			var edges = curr_vert.getOutgoingEdges();
 			for (var edge in edges) {
 				if (edges.hasOwnProperty(edge)) {
-					var w = edges[edge].getOpposite();
+					var w = edges[edge].getOpposite(curr_vert);
 
-					if (w.dist > curr_vert.dist + edges[edge].getWeight()) {
+					if (w.dist > curr_vert.dist + edges[edge].edgeWeight) {
 						//really inefficient way of doing this...
 						heap.remove(w);
-						w.dist = curr_vert.dist + edges[edge].getWeight();
-						w.prev = edges[edge];
+						w.dist = curr_vert.dist + edges[edge].edgeWeight;
+						w.prev = curr_vert;
 						heap.push(w);
+						if (w.getKey() === end.getKey()) {
+							var pointer_chaser = end;
+							while (pointer_chaser.prev !== null) {
+								path.push([pointer_chaser, pointer_chaser.prev]);
+								pointer_chaser = pointer_chaser.prev;
+							}
+							return callback(path);
+						}
+
 					}
 				}
 			}
-			path.push(curr_vert);
 		}
+		console.log('could not reach end vertex');
 		callback(path);
 	};
 

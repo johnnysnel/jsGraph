@@ -51,16 +51,16 @@ $(document).ready(function() {
 		$('#dijkstra-results').empty();
 		var myGraph = init_canvas_graph();
 		var start_name = $('#di-input').val();
+		var end_name = $('#di-end-input').val();
+
 		var start = myGraph.getVertex(start_name);
-		Traversal.dijkstra(start, myGraph, function(v) {
-			//var rend_template = Mustache.render(li_template, v);
-			//$('#dijkstra-results').append(rend_template);
-			//console.log(v);
-		}, function(path) {
+		var end = myGraph.getVertex(end_name);
+		Traversal.dijkstra(start, end, myGraph, function(path) {
 			console.log('finished with dijkstras: ', path);
 			for (var i = 0; i < path.length; i++) {
-				console.log('path: ', path[i].prev);
-				//Visualizer.markEdge(path[i].prev);
+				if (path[i].prev !== null) {
+					Visualizer.markEdge(myGraph.getConnectingEdge(path[i][0], path[i][1]));
+				}
 				var rend_template = Mustache.render(li_template, path[i]);
 				$('#dijkstra-results').append(rend_template);
 			}
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			console.log('finished with prims: ', mst);
 			for (var i = 0; i < mst.length; i++) {
 				var verts = mst[i];
-				Visualizer.markEdge(myGraph.getConnectingEdge(verts[0],verts[1]));
+				Visualizer.markEdge(myGraph.getConnectingEdge(verts[0], verts[1]));
 
 
 				var rend_template = Mustache.render(li_template, mst[i]);

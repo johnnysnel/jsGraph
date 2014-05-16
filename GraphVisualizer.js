@@ -19,6 +19,7 @@ Visualizer.markEdge = function(edge) {
 	console.log(edge.getKey());
 	var ek = edge.getKey();
 	visualizer_graph.edges[ek.toString()].strokeColor = 'red';
+	view.update();
 }
 
 selected_vertices = [];

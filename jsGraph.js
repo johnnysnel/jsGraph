@@ -186,7 +186,7 @@ var GraphPkg = {};
 	GraphPkg.jsGraph.prototype.getNumberOfOutgoingEdges = function(vertex) {
 		return vertex.getNumberOfOutgoingEdges();
 	};
-	//todo
+	
 	GraphPkg.jsGraph.prototype.areAdjacent = function(v1, v2) {
 		return this.getConnectingEdge(v1, v2) !== undefined;
 	};
