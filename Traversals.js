@@ -211,13 +211,13 @@ var Traversal = {};
 				pair.push(v.prev);
 				MST.push(pair);
 			}
-			var edges = graph.getIncidentEdges(v);
+			var edges = graph.incidentEdges(v);
 			for (var e in edges) {
 				if (edges.hasOwnProperty(e)) {
-					var w = e.getOpposite(v);
-					if (w.cost > e.edgeWeight) {
+					var w = edges[e].getOpposite(v);
+					if (w.cost > edges[e].edgeWeight) {
 						heap.remove(w);
-						w.cost = e.edgeWeight;
+						w.cost = edges[e].edgeWeight;
 						w.prev = v;
 						heap.push(w);
 					}

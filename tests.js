@@ -88,6 +88,10 @@ $(document).ready(function() {
 		Traversal.prim_jarnik(myGraph, function(mst) {
 			console.log('finished with prims: ', mst);
 			for (var i = 0; i < mst.length; i++) {
+				var verts = mst[i];
+				Visualizer.markEdge(myGraph.getConnectingEdge(verts[0],verts[1]));
+
+
 				var rend_template = Mustache.render(li_template, mst[i]);
 				$('#prims-results').append(rend_template);
 			}
