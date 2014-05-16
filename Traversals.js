@@ -1,4 +1,4 @@
-/* global BinaryHeap, i */
+/* global BinaryHeap */
 
 var Traversal = {};
 (function() {
@@ -52,7 +52,7 @@ var Traversal = {};
 		while (Q.length > 0) {
 			var n = Q.shift();
 			behavior(n);
-			var edges = n.getOutgoingEdges()
+			var edges = n.getOutgoingEdges();
 			for (var edge in edges) {
 				if (edges.hasOwnProperty(edge)) {
 					var w = edges[edge].getOpposite(n);
@@ -88,7 +88,7 @@ var Traversal = {};
 		//comparator... because of how heap was implemented
 		var identity = function(vert) {
 			return vert.dist;
-		}
+		};
 		var heap = new BinaryHeap(identity);
 		var vertices = graph.vertices();
 		var path = [];
@@ -101,7 +101,7 @@ var Traversal = {};
 		}
 		//need to log it to see which one it is, or if both.
 		start.dist = 0;
-		vertices[start.getKey().toString()].dist = 0
+		vertices[start.getKey().toString()].dist = 0;
 		//add vertices to heap
 		for (var vert in vertices) {
 			if (vertices.hasOwnProperty(vert)) {
@@ -129,7 +129,7 @@ var Traversal = {};
 			path.push(curr_vert);
 		}
 		callback(path);
-	}
+	};
 
 	Traversal.bell_ford = function(start, graph, behavior, callback) {
 
@@ -175,26 +175,27 @@ var Traversal = {};
 		//sort for lowest distance to highest TODO WHY IS EVERYTHING BEING
 		//SORTED EXCEPT FOR THE 6th VERTEX?!!??!
 		path.sort(function(a) {
-			return a.dist
+			return a.dist;
 		});
-		for (var i = 0; i < path.length; i++) {
+
+		for (i = 0; i < path.length; i++) {
 			behavior(path[i]);
-		};
+		}
 		callback(path);
 	};
 
-	Traversal.prim_jarnik = function(graph) {
+	Traversal.prim_jarnik = function(graph, callback) {
 		var identity = function(vert) {
 			return vert.cost;
 		};
 		var MST = [];
 		var heap = new BinaryHeap(identity);
 		var vertices = graph.vertices();
-		for (var v in vertices) {
+		for (var vert in vertices) {
 			if (vertices.hasOwnProperty(v)) {
-				vertices[v].cost = Infinity;
-				vertices[v].prev = null;
-				heap.push(vertices[v]);
+				vertices[vert].cost = Infinity;
+				vertices[vert].prev = null;
+				heap.push(vertices[vert]);
 			}
 		}
 		//start at a random (the last added to the heap in this case) vertex
@@ -214,20 +215,20 @@ var Traversal = {};
 			for (var e in edges) {
 				if (edges.hasOwnProperty(e)) {
 					var w = e.getOpposite(v);
-					if (w.cost > edge.edgeWeight) {
+					if (w.cost > e.edgeWeight) {
 						heap.remove(w);
-						w.cost = edge.edgeWeight;
+						w.cost = e.edgeWeight;
 						w.prev = v;
 						heap.push(w);
 					}
 				}
 			}
 		}
-		return MST;
-	}
+		callback(MST);
+	};
 
 	Traversal.kruskal = function(vertex) {
-
-	}
+		return vertex;
+	};
 
 }());

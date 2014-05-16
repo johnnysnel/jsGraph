@@ -4,6 +4,9 @@ var li_template = '<li class="list-group-item">{{vertKey}}</li>';
 
 $(document).ready(function() {
 
+	$('#init-graph').click(function() {
+		init_canvas_graph();
+	});
 
 	//topsort
 	$('#topsort-go').click(function() {
@@ -47,7 +50,7 @@ $(document).ready(function() {
 	$('#dijkstra-go').click(function() {
 		$('#dijkstra-results').empty();
 		var myGraph = init_canvas_graph();
-		var start_name= $('#di-input').val();
+		var start_name = $('#di-input').val();
 		var start = myGraph.getVertex(start_name);
 		Traversal.dijkstra(start, myGraph, function(v) {
 			//var rend_template = Mustache.render(li_template, v);
@@ -56,7 +59,7 @@ $(document).ready(function() {
 		}, function(path) {
 			console.log('finished with dijkstras: ', path);
 			for (var i = 0; i < path.length; i++) {
-				console.log("path: ",path[i].prev);
+				console.log('path: ', path[i].prev);
 				//Visualizer.markEdge(path[i].prev);
 				var rend_template = Mustache.render(li_template, path[i]);
 				$('#dijkstra-results').append(rend_template);
@@ -78,10 +81,19 @@ $(document).ready(function() {
 
 	});
 
-	$('#init-graph').click(function() {
-		init_canvas_graph();
-	});
+	$('#prims-go').click(function() {
+		$('#prims-results').empty();
+		var myGraph = init_canvas_graph();
 
+		Traversal.prim_jarnik(myGraph, function(mst) {
+			console.log('finished with prims: ', mst);
+			for (var i = 0; i < mst.length; i++) {
+				var rend_template = Mustache.render(li_template, mst[i]);
+				$('#prims-results').append(rend_template);
+			}
+		});
+
+	});
 
 });
 
