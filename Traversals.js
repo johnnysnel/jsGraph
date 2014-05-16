@@ -1,4 +1,4 @@
-/* global BinaryHeap */
+/* global BinaryHeap, i */
 
 var Traversal = {};
 (function() {
@@ -146,8 +146,8 @@ var Traversal = {};
 				path.push(vertices[vert]);
 			}
 		}
-		start.dist = 0
-		vertices[start.getKey().toString()].dist = 0
+		start.dist = 0;
+		vertices[start.getKey().toString()].dist = 0;
 		for (var i = 0; i < num_of_verts - 1; i++) {
 			for (var edge in edges) {
 				if (edges.hasOwnProperty(edge)) {
@@ -179,12 +179,51 @@ var Traversal = {};
 		});
 		for (var i = 0; i < path.length; i++) {
 			behavior(path[i]);
-		}
+		};
 		callback(path);
-	}
+	};
 
-	Traversal.prim_jarnik = function(vertex) {
+	Traversal.prim_jarnik = function(graph) {
+		var identity = function(vert) {
+			return vert.cost;
+		};
+		var MST = [];
+		var heap = new BinaryHeap(identity);
+		var vertices = graph.vertices();
+		for (var v in vertices) {
+			if (vertices.hasOwnProperty(v)) {
+				vertices[v].cost = Infinity;
+				vertices[v].prev = null;
+				heap.push(vertices[v]);
+			}
+		}
+		//start at a random (the last added to the heap in this case) vertex
+		var start = heap.pop();
+		start.cost = 0;
+		heap.push(start);
 
+		while (heap.size() > 0) {
+			var v = heap.pop();
+			if (v.prev !== null) {
+				var pair = [];
+				pair.push(v);
+				pair.push(v.prev);
+				MST.push(pair);
+			}
+			var edges = graph.getIncidentEdges(v);
+			for (var e in edges) {
+				if (edges.hasOwnProperty(e)) {
+					var w = e.getOpposite(v);
+					if (w.cost > edge.edgeWeight) {
+						heap.remove(w);
+						w.cost = edge.edgeWeight;
+						w.prev = v;
+						heap.push(w);
+					}
+				}
+			}
+		}
+		return MST;
 	}
 
 	Traversal.kruskal = function(vertex) {
