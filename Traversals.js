@@ -192,7 +192,7 @@ var Traversal = {};
 		var heap = new BinaryHeap(identity);
 		var vertices = graph.vertices();
 		for (var vert in vertices) {
-			if (vertices.hasOwnProperty(v)) {
+			if (vertices.hasOwnProperty(vert)) {
 				vertices[vert].cost = Infinity;
 				vertices[vert].prev = null;
 				heap.push(vertices[vert]);
