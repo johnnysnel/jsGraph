@@ -1,7 +1,7 @@
 jsGraph
 =======
 
-An implementation of a graph ADT written in javascript.
+An implementation of a graph ADT written in javascript along with some basic graph traversals.
 
 This is a set of libraries I wrote to practice for my Algorithms & Data Structures final. I wanted to practice the material while improving my knowledge of javascript.
 
@@ -15,6 +15,6 @@ This is a set of libraries I wrote to practice for my Algorithms & Data Structur
 <li>A visualizer using the paper.js framework.</li>
 </ul>
 
-See the demo here: http://johnnysnel.github.io/jsGraph/
+See the demo here: http://jsnelgro.github.io/jsGraph/
 
 Note: not everything works yet. Currently, graphs built with the visualizer can only run Dijkstra’s and Prim-Jarnik's. Edges are also always randomly weighted and undirected.
